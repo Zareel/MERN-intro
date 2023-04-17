@@ -19,6 +19,8 @@ Frameworks for the above technologies
 
 # Nodejs
 
+NodeJS is an open source, cross platform, javascript runtime environment with the focus on server side and networking application
+
 ## Why node js
 
 - node js runs on javascript
@@ -105,7 +107,7 @@ console.log(`my favourite villain is ${myVillain}`);
 
 ## Express
 
-: less repetetive code
+Express js is a small framework that works on top of nodeJS webserver functionality to simplify it's API's and add helpfull new features
 
 # Creating our first server with nodejs and express
 
@@ -125,6 +127,8 @@ app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
 ```
+
+PORT is where things are kept in the server. PORT never get displayed in the url
 
 # Handling Requests and Responses: the `get` request
 
@@ -192,7 +196,7 @@ It indecates whether an http request has been successfully completed
 400-499 => error from client side
 500-599 => error from server side
 
-now lets add a post method to handle a post request that come to our home route
+## now lets add a post method to handle a post request that come to our home route
 
 ```js
 const express = require("express");
@@ -237,13 +241,13 @@ in addition to that we are using an option called extended and set it to be true
 
 ```js
 app.use(bodyParser.urlencoded({ extended: true }));
-// this is baically the code that you need to write every time you want to use body parser
+// this is basically the code that you need to write every time you want to use body parser
 ```
 
 setting the extended to be true that allows us to post nested object.
 why would you want to use the body parser?
 It allows you to go into any of your route and you can tap into requst.body.
-in other words by using bodyParser we are able to parse the http request that that we get and by using urlencoded, we can get access to the form data
+in other words by using bodyParser we are able to parse the http request that we get and by using urlencoded, we can get access to the form data
 
 So here is our calcultor
 
@@ -270,3 +274,19 @@ app.listen(PORT, () => {
   console.log(`App is listening to port ${PORT}`);
 });
 ```
+
+The important thing to take away from this is when you look at your website => right click => view page source =>
+the client get to see a plain simple html code. No js code is visible. All the js code is hidden from the client as we have done it on our server. This is all because we built a backend that is doing the code execution instead of all of that js code running in the frontend which is on the client's browser
+=============================================================
+
+# BMI Routing challenge
+
+- Create a new file called bmiCalculator.html inside the calculator folder from the last challenge
+- Add the html boiler plate and set the page title BMI Calcualator
+- Add and html form, this form will make a post request to our server at the route/ bmicalculator. The form will have inputs weitht and height with place holder text that tell the user what they should type into which text box
+- Add a button which says `Calculate BMI`
+- Add the get and post methods fro the /bmicalculator route into the same server.js file we have been using
+- Use sendFile to send the bmiCalculator.html page as a response inside the get method
+- Add an h1 that says BMI Calculator
+- Inside server.js, create 2 variables one for weight and one for height
+- Use the BMI Calculator code you wrote peviously, or write some new code to calculate and send back the result as text. It should read something like "Your BMI is N" where N is equalt to the calculated BMI based on their weight and height inputs
