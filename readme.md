@@ -139,3 +139,22 @@ app.listen(PORT, () => {
   console.log(`Listening on PORT: ${PORT}`);
 });
 ```
+
+When we typed in localhost:3000, we specified a location of a server. And when we hit enter the browse will go to this location and make a request to get some data back and when that request gets made at the home location (app.get("/"))
+then the call back gets triggered and we send the browser a response which is just a plain test "Hello World". That get send back to the browser and renders it on the screen
+
+- create a new route called about so that when i got to the about page of my website localhost to see a quick brief bio of who you are
+
+==============================================================
+
+# nodemon installation
+
+nodemon, an npm package that will make it way easier for us to autostart our servers
+
+- nodemon is a utility that will monitor for any changes in your source and automatically restart your server
+- means my server is active and refreshed to the latest version of code at all time
+- it saves your sanity 😄
+
+=============================================
+
+# let's make a calculator
