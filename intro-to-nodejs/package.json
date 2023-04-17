@@ -1,0 +1,23 @@
+{
+  "name": "fullstack",
+  "version": "1.0.0",
+  "description": "an intro to nodejs project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zareel/MERN-intro.git"
+  },
+  "author": "Zareel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zareel/MERN-intro/issues"
+  },
+  "homepage": "https://github.com/Zareel/MERN-intro#readme",
+  "dependencies": {
+    "superheroes": "^3.0.0",
+    "supervillains": "^3.1.0"
+  }
+}

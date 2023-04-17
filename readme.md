@@ -127,5 +127,15 @@ app.listen(PORT, () => {
 # Handling Requests and Responses: the `get` request
 
 ```js
+const express = require("express");
+const app = express();
+PORT = 3000;
 
+app.get("/", (req, res) => {
+  res.send("hello world!");
+});
+
+app.listen(PORT, () => {
+  console.log(`Listening on PORT: ${PORT}`);
+});
 ```
