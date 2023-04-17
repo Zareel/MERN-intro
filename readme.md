@@ -1,3 +1,5 @@
+# Backend
+
 In backend our server interacts with our database then we execute some code on our server to create an application which then server to the client side. This will speed up your website and also keeps your business logic hidden
 
 The commonly used technologies in the backen
@@ -158,3 +160,113 @@ nodemon, an npm package that will make it way easier for us to autostart our ser
 =============================================
 
 # let's make a calculator
+
+## Responding to request with html files
+
+- create a file called index.html in the root folder
+
+- index.html
+
+```html
+<body>
+  <h1>Calculator</h1>
+  <form action="/" method="post">
+    <input type="text" name="num1" placeholder="first number" />
+    <input type="text" name="num2" placeholder="second number" />
+    <button type="submit" name="submit">Calculator</button>
+  </form>
+</body>
+```
+
+express => API reference => response => res.send => res.sendFile
+
+- send.File transfers the file at the given path
+  [Link - express,res.sendFils](http://expressjs.com/en/4x/api.html#res.send)
+
+## What is http response status code?
+
+It indecates whether an http request has been successfully completed
+100-199 => informational responsex
+200-299 => success responsex
+300-399 => redirectional message
+400-499 => error from client side
+500-599 => error from server side
+
+now lets add a post method to handle a post request that come to our home route
+
+```js
+const express = require("express");
+const app = express();
+PORT = 3000;
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+app.post("/", (req, res) => {
+  res.send("thanks for posting that");
+});
+
+app.listen(PORT, () => {
+  console.log(`App is listening to port ${PORT}`);
+});
+```
+
+## now how will we tap into the form data and do the calculation? 😕
+
+for that we have to install another npm package which is called body parser
+
+- npm install body-parser
+- const bodyParser = require("body-parser")
+  This is going to allow us to parse the information that we get to send from the post request
+
+```js
+const bodyParser = require("body-parser");
+
+app.use(bodyParser);
+```
+
+bodyParser has a few modes
+
+- bodyParser.text() => parse all the request into text
+- bodyParser.json() => that special format which looks like javascript object
+- bodyParser.urlencoded() => parse data that comes from html form
+
+so here we are using bodyParser.urlencoded()
+in addition to that we are using an option called extended and set it to be true.
+
+```js
+app.use(bodyParser.urlencoded({ extended: true }));
+// this is baically the code that you need to write every time you want to use body parser
+```
+
+setting the extended to be true that allows us to post nested object.
+why would you want to use the body parser?
+It allows you to go into any of your route and you can tap into requst.body.
+in other words by using bodyParser we are able to parse the http request that that we get and by using urlencoded, we can get access to the form data
+
+So here is our calcultor
+
+```js
+const express = require("express");
+const app = express();
+PORT = 3000;
+
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+app.post("/", (req, res) => {
+  let num1 = Number(req.body.num1);
+  let num2 = Number(req.body.num2);
+  let result = num1 + num2;
+  res.send(`The result is: ${result}`);
+});
+
+app.listen(PORT, () => {
+  console.log(`App is listening to port ${PORT}`);
+});
+```
